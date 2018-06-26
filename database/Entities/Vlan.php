@@ -83,6 +83,11 @@ class Vlan
     private $routers;
 
     /**
+     * @var \Entities\FaucetController;
+     */
+    private $faucet_controller;
+
+    /**
      * Constructor
      */
     public function __construct()

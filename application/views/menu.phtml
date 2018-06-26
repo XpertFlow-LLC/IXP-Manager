@@ -13,7 +13,7 @@
     <li class="nav-header">IXP Customer Actions</li>
 
         <li {if $controller eq 'customer' and ( $action eq 'list' or $action eq 'add' or $action eq 'edit' or $action eq 'dashboard' )}class="active"{/if}>
-            <a href="{route( 'customer@list')}">Customers</a>
+            <a href="{genUrl controller='customer' action='list'}">Customers</a>
         </li>
 
         <li>
@@ -62,12 +62,12 @@
             <a href="{route( 'rack@list' )}">Racks</a>
         </li>
 
-        <li {if $controller eq 'router'}class="active"{/if}>
-            <a href="{genUrl controller='router' action='list'}">Routers</a>
+        <li {if $controller eq 'faucet-controller'}class="active"{/if}>
+            <a href="{genUrl controller='faucet-controller' action='list'}">Faucet Controllers</a>
         </li>
 
-        <li {if $controller eq 'console-server'}class="active"{/if}>
-            <a href="{route( 'console-server@list' )}">Console Servers</a>
+        <li {if $controller eq 'router'}class="active"{/if}>
+            <a href="{genUrl controller='router' action='list'}">Routers</a>
         </li>
 
         <li {if $controller eq 'switch' and $action neq 'add-ports'}class="active"{/if}>
@@ -134,6 +134,12 @@
             <a href="{genUrl controller='vendor' action='list'}">Vendors</a>
         </li>
 
+        {if not isset( $options['frontend']['disabled']['console-server-connection'] ) or not $options['frontend']['disabled']['console-server-connection'] }
+            <li {if $controller eq 'console-server-connection'}class="active"{/if}>
+                <a href="{genUrl controller='console-server-connection' action='list'}">Console Server Connections</a>
+            </li>
+        {/if}
+
         <li {if $controller eq 'vlan' and $action neq 'private'}class="active"{/if}>
             <a href="{genUrl controller='vlan' action='list'}">VLANs</a>
 
@@ -161,12 +167,14 @@
     <li class="nav-header">IXP Statistics</li>
 
         <li {if $controller eq 'statistics' and $action eq 'members'}class="active"{/if}>
-            <a href="{genUrl controller='statistics' action='members'}">Member Statistics</a>
+            <a href="{genUrl controller='statistics' action='members'}">Member Statistics - Graphs</a>
         </li>
-
+        <li {if $controller eq 'statistics' and $action eq 'list'}class="active"{/if}>
+            <a href="{genUrl controller='statistics' action='list'}">Member Statistics - List</a>
+        </li>
         {if $logoManagementActive}
-            <li {if $controller eq 'logo' }class="active"{/if}>
-                <a href="{route( 'logo@logos' )}">Member Logos</a>
+            <li {if $controller eq 'customer' and $action eq 'logos'}class="active"{/if}>
+                <a href="{genUrl controller='customer' action='logos'}">Member Logos</a>
             </li>
         {/if}
         <li {if $controller eq 'statistics' and $action eq 'league-table'}class="active"{/if}>
